@@ -1,7 +1,6 @@
-import Product from "./components/Product";
+import { Outlet } from "react-router-dom";
+import "@App.css";
 
-function App(): React.ReactElement {
-  return <Product />;
+export default function App(): React.ReactElement {
+  return <Outlet />;
 }
-
-export default App;
