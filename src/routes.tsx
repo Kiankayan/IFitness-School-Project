@@ -4,6 +4,7 @@ import Home from "./pages/Home.tsx";
 import Profile from "./pages/Profile.tsx";
 import Workouts from "./pages/Workouts.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import WorkoutsDetails from "./pages/WorkoutDetails.tsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "workouts",
         element: <Workouts />,
+      },
+      {
+        path: "workouts/:id",
+        element: <WorkoutsDetails />,
       },
     ],
   },
