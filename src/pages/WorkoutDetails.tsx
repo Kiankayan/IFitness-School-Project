@@ -14,7 +14,17 @@ export default function WorkoutsDetails() {
       <h2>Exercises</h2>
       <ul>
         {workout.exercises.map((exercise) => (
-          <li key={exercise.id}>{exercise.name}</li>
+          <li key={exercise.id}>
+            {exercise.name}
+
+            <ul>
+              {exercise.sets.map((set) => (
+                <li key={set.id}>
+                  {set.reps} reps x {set.weight} kg
+                </li>
+              ))}
+            </ul>
+          </li>
         ))}
       </ul>
     </>
