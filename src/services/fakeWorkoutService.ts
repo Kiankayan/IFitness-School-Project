@@ -1,0 +1,140 @@
+import type { Workout } from "../types/types";
+
+const workouts: Workout[] = [
+  {
+    id: 1,
+    title: "Push Day",
+    date: "2026-07-08",
+    exercises: [
+      {
+        id: 1,
+        name: "Bench Press",
+        sets: [
+          { id: 1, reps: 8, weight: 80 },
+          { id: 2, reps: 8, weight: 80 },
+          { id: 3, reps: 6, weight: 85 },
+        ],
+      },
+      {
+        id: 2,
+        name: "Incline Dumbbell Press",
+        sets: [
+          { id: 1, reps: 10, weight: 26 },
+          { id: 2, reps: 10, weight: 26 },
+          { id: 3, reps: 8, weight: 28 },
+        ],
+      },
+      {
+        id: 3,
+        name: "Shoulder Press",
+        sets: [
+          { id: 1, reps: 10, weight: 20 },
+          { id: 2, reps: 10, weight: 20 },
+          { id: 3, reps: 8, weight: 22 },
+        ],
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Pull Day",
+    date: "2026-07-09",
+    exercises: [
+      {
+        id: 1,
+        name: "Pull Ups",
+        sets: [
+          { id: 1, reps: 8, weight: 0 },
+          { id: 2, reps: 8, weight: 0 },
+          { id: 3, reps: 6, weight: 5 },
+        ],
+      },
+      {
+        id: 2,
+        name: "Barbell Row",
+        sets: [
+          { id: 1, reps: 10, weight: 60 },
+          { id: 2, reps: 10, weight: 60 },
+          { id: 3, reps: 8, weight: 65 },
+        ],
+      },
+      {
+        id: 3,
+        name: "Lat Pulldown",
+        sets: [
+          { id: 1, reps: 12, weight: 55 },
+          { id: 2, reps: 10, weight: 60 },
+          { id: 3, reps: 8, weight: 65 },
+        ],
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Leg Day",
+    date: "2026-07-10",
+    exercises: [
+      {
+        id: 1,
+        name: "Squat",
+        sets: [
+          { id: 1, reps: 8, weight: 100 },
+          { id: 2, reps: 8, weight: 100 },
+          { id: 3, reps: 6, weight: 110 },
+        ],
+      },
+      {
+        id: 2,
+        name: "Romanian Deadlift",
+        sets: [
+          { id: 1, reps: 10, weight: 80 },
+          { id: 2, reps: 10, weight: 80 },
+          { id: 3, reps: 8, weight: 90 },
+        ],
+      },
+      {
+        id: 3,
+        name: "Leg Press",
+        sets: [
+          { id: 1, reps: 12, weight: 180 },
+          { id: 2, reps: 12, weight: 180 },
+          { id: 3, reps: 10, weight: 200 },
+        ],
+      },
+    ],
+  },
+];
+
+export function getWorkouts() {
+  return workouts;
+}
+
+export function getWorkout(id: number) {
+  return workouts.find((workout) => workout.id === id);
+}
+
+export function saveWorkout(workout: Workout) {
+  const workoutInDb = workouts.find((w) => w.id === workout.id);
+
+  if (workoutInDb) {
+    workoutInDb.title = workout.title;
+    workoutInDb.date = workout.date;
+    workoutInDb.exercises = workout.exercises;
+    return workoutInDb;
+  }
+
+  const newWorkout = {
+    ...workout,
+    id: workouts.length + 1,
+  };
+
+  workouts.push(newWorkout);
+
+  return newWorkout;
+}
+
+export function deleteWorkout(id: number) {
+  const index = workouts.findIndex((workout) => workout.id === id);
+
+  if (index !== -1) workouts.splice(index, 1);
+}
