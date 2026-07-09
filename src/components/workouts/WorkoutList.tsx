@@ -1,5 +1,5 @@
 import type { Workout } from "../../types/types";
-import { Link } from "react-router-dom";
+import WorkoutCard from "./WorkoutCard";
 
 interface Props {
   workouts: Workout[];
@@ -9,13 +9,7 @@ export default function WorkoutList({ workouts }: Props) {
   return (
     <>
       {workouts.map((workout) => (
-        <div key={workout.id}>
-          <h3>
-            <Link to={`/workouts/${workout.id}`}>{workout.title}</Link>
-          </h3>
-
-          <p>{workout.date}</p>
-        </div>
+        <WorkoutCard key={workout.id} workout={workout} />
       ))}
     </>
   );
