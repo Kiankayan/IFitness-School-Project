@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { getWorkout } from "../services/fakeWorkoutService";
+import ExerciseList from "../components/exercises/ExerciseList";
 
 export default function WorkoutsDetails() {
   const { id } = useParams();
@@ -12,21 +13,7 @@ export default function WorkoutsDetails() {
       <h1>{workout.title}</h1>
       <p>{workout.date}</p>
       <h2>Exercises</h2>
-      <ul>
-        {workout.exercises.map((exercise) => (
-          <li key={exercise.id}>
-            {exercise.name}
-
-            <ul>
-              {exercise.sets.map((set) => (
-                <li key={set.id}>
-                  {set.reps} reps x {set.weight} kg
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ul>
+      <ExerciseList exercises={workout.exercises} />
     </>
   );
 }
