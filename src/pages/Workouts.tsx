@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { getWorkouts } from "../services/fakeWorkoutService";
 import type { Workout } from "../types/types";
+import WorkoutList from "../components/workouts/WorkoutList";
 
 export default function Workouts() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
@@ -14,15 +14,7 @@ export default function Workouts() {
     <>
       <h1>Workouts</h1>
 
-      {workouts.map((workout) => (
-        <div key={workout.id}>
-          <h3>
-            <Link to={`/workouts/${workout.id}`}>{workout.title}</Link>
-          </h3>
-
-          <p>{workout.date}</p>
-        </div>
-      ))}
+      <WorkoutList workouts={workouts} />
     </>
   );
 }
