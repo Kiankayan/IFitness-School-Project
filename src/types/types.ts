@@ -5,6 +5,14 @@ export interface Workout {
   exercises: Exercise[];
 }
 
+export interface Profile {
+  id: number;
+  name: string;
+  age: number;
+  height: number;
+  weight: number;
+}
+
 export interface Exercise {
   id: number;
   name: string;
