@@ -5,6 +5,7 @@ import Profile from "./pages/Profile.tsx";
 import Workouts from "./pages/Workouts.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import WorkoutsDetails from "./pages/WorkoutDetails.tsx";
+import WorkoutForm from "./pages/WorkoutForm.tsx";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,14 @@ const router = createBrowserRouter([
       {
         path: "workouts/:id",
         element: <WorkoutsDetails />,
+      },
+      {
+        path: "workouts/new",
+        element: <WorkoutForm />,
+      },
+      {
+        path: "workouts/:id/edit",
+        element: <WorkoutForm />,
       },
     ],
   },
