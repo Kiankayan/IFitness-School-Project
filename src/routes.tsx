@@ -7,6 +7,7 @@ import NotFound from "./pages/NotFound.tsx";
 import WorkoutsDetails from "./pages/WorkoutDetails.tsx";
 import WorkoutForm from "./pages/WorkoutForm.tsx";
 import ExerciseForm from "./pages/ExerciseForm.tsx";
+import ExerciseDetails from "./pages/ExerciseDetails.tsx";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "workouts/:id/exercises/new",
         element: <ExerciseForm />,
+      },
+      {
+        path: "workouts/:id/exercises/:exerciseId",
+        element: <ExerciseDetails />,
       },
     ],
   },

@@ -17,7 +17,7 @@ export default function WorkoutsDetails() {
       <button onClick={() => navigate(`/workouts/${id}/exercises/new`)}>
         Add Exercise
       </button>
-      <ExerciseList exercises={workout.exercises} />
+      <ExerciseList exercises={workout.exercises} workoutId={workout.id} />
     </>
   );
 }
