@@ -1,4 +1,4 @@
-import type { Workout } from "../types/types";
+import type { Workout, Exercise } from "../types/types";
 
 const workouts: Workout[] = [
   {
@@ -137,4 +137,19 @@ export function deleteWorkout(id: number) {
   const index = workouts.findIndex((workout) => workout.id === id);
 
   if (index !== -1) workouts.splice(index, 1);
+}
+
+export function saveExercise(workoutId: number, exercise: Exercise) {
+  const workout = workouts.find((w) => w.id === workoutId);
+
+  if (!workout) return;
+
+  const newExercise = {
+    ...exercise,
+    id: workout.exercises.length + 1,
+  };
+
+  workout.exercises.push(newExercise);
+
+  return newExercise;
 }
