@@ -1,20 +1,33 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { saveExercise } from "../services/fakeWorkoutService";
+import { useState, useEffect } from "react";
+import { saveExercise, getExercise } from "../services/fakeWorkoutService";
 
 export default function ExerciseForm() {
-  const { id } = useParams();
+  const { id, exerciseId } = useParams();
   const workoutId = Number(id);
   const navigate = useNavigate();
   const [exerciseName, setExerciseName] = useState("");
 
+  useEffect(() => {
+    if (!exerciseId) return;
+
+    const exercise = getExercise(workoutId, Number(exerciseId));
+    if (exercise) {
+      setExerciseName(exercise.name);
+    }
+  }, [exerciseId]);
+
   function handleSubmit(event: any) {
     event.preventDefault();
 
+    const existingExercise = exerciseId
+      ? getExercise(workoutId, Number(exerciseId))
+      : undefined;
+
     const exerciseToSave = {
-      id: 0,
+      id: existingExercise ? existingExercise.id : 0,
       name: exerciseName,
-      sets: [],
+      sets: existingExercise ? existingExercise.sets : [],
     };
 
     saveExercise(workoutId, exerciseToSave);

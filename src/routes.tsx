@@ -45,6 +45,10 @@ const router = createBrowserRouter([
         element: <ExerciseForm />,
       },
       {
+        path: "workouts/:id/exercises/:exerciseId/edit",
+        element: <ExerciseForm />,
+      },
+      {
         path: "workouts/:id/exercises/:exerciseId",
         element: <ExerciseDetails />,
       },

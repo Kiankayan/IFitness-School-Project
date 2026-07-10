@@ -149,6 +149,15 @@ export function saveExercise(workoutId: number, exercise: Exercise) {
 
   if (!workout) return;
 
+  const exerciseInDb = workout.exercises.find((e) => e.id === exercise.id);
+
+  if (exerciseInDb) {
+    exerciseInDb.name = exercise.name;
+    exerciseInDb.sets = exercise.sets;
+
+    return exerciseInDb;
+  }
+
   const newExercise = {
     ...exercise,
     id: workout.exercises.length + 1,
@@ -176,4 +185,18 @@ export function saveSet(workoutId: number, exerciseId: number, set: Set) {
   exercise.sets.push(newSet);
 
   return newSet;
+}
+
+export function deleteExercise(workoutId: number, exerciseId: number) {
+  const workout = getWorkout(workoutId);
+
+  if (!workout) return;
+
+  const index = workout.exercises.findIndex(
+    (exercise) => exercise.id === exerciseId,
+  );
+
+  if (index !== -1) {
+    workout.exercises.splice(index, 1);
+  }
 }
