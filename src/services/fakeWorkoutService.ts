@@ -1,4 +1,4 @@
-import type { Workout, Exercise } from "../types/types";
+import type { Workout, Exercise, Set } from "../types/types";
 
 const workouts: Workout[] = [
   {
@@ -113,6 +113,11 @@ export function getWorkout(id: number) {
   return workouts.find((workout) => workout.id === id);
 }
 
+export function getExercise(workoutId: number, exerciseId: number) {
+  const workout = getWorkout(workoutId);
+  return workout?.exercises.find((exercise) => exercise.id === exerciseId);
+}
+
 export function saveWorkout(workout: Workout) {
   const workoutInDb = workouts.find((w) => w.id === workout.id);
 
@@ -152,4 +157,23 @@ export function saveExercise(workoutId: number, exercise: Exercise) {
   workout.exercises.push(newExercise);
 
   return newExercise;
+}
+
+export function saveSet(workoutId: number, exerciseId: number, set: Set) {
+  const workout = getWorkout(workoutId);
+
+  if (!workout) return;
+
+  const exercise = workout.exercises.find((e) => e.id === exerciseId);
+
+  if (!exercise) return;
+
+  const newSet = {
+    ...set,
+    id: exercise.sets.length + 1,
+  };
+
+  exercise.sets.push(newSet);
+
+  return newSet;
 }

@@ -1,14 +1,34 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { getExercise } from "../services/fakeWorkoutService";
 
 export default function ExerciseDetails() {
   const { id, exerciseId } = useParams();
+  const exercise = getExercise(Number(id), Number(exerciseId));
+  const navigate = useNavigate();
+
+  if (!exercise) return <h1>Exercise not found</h1>;
 
   return (
     <>
-      <h1>Exercise Details</h1>
+      <h1>{exercise.name}</h1>
 
-      <p>Workout ID: {id}</p>
-      <p>Exercise ID: {exerciseId}</p>
+      <h2>Sets</h2>
+
+      <button
+        onClick={() =>
+          navigate(`/workouts/${id}/exercises/${exerciseId}/sets/new`)
+        }
+      >
+        Add Set
+      </button>
+
+      <ul>
+        {exercise.sets.map((set) => (
+          <li key={set.id}>
+            {set.reps} reps x {set.weight} kg
+          </li>
+        ))}
+      </ul>
     </>
   );
 }
