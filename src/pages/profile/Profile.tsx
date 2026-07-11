@@ -1,4 +1,4 @@
-import { getProfile, saveProfile } from "../services/fakeProfileService";
+import { getProfile, saveProfile } from "../../services/fakeProfileService";
 import { useState } from "react";
 
 function Profile() {
