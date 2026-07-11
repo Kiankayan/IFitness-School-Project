@@ -118,6 +118,11 @@ export function getExercise(workoutId: number, exerciseId: number) {
   return workout?.exercises.find((exercise) => exercise.id === exerciseId);
 }
 
+export function getSet(workoutId: number, exerciseId: number, setId: number) {
+  const exercise = getExercise(workoutId, exerciseId);
+  return exercise?.sets.find((set) => set.id === setId);
+}
+
 export function saveWorkout(workout: Workout) {
   const workoutInDb = workouts.find((w) => w.id === workout.id);
 
