@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { getExercise } from "../services/fakeWorkoutService";
 
 export default function ExerciseDetails() {
@@ -25,7 +25,9 @@ export default function ExerciseDetails() {
       <ul>
         {exercise.sets.map((set) => (
           <li key={set.id}>
-            {set.reps} reps x {set.weight} kg
+            <Link to={`/workouts/${id}/exercises/${exerciseId}/sets/${set.id}`}>
+              {set.reps} reps x {set.weight} kg
+            </Link>
           </li>
         ))}
       </ul>

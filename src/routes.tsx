@@ -9,6 +9,7 @@ import WorkoutForm from "./pages/WorkoutForm.tsx";
 import ExerciseForm from "./pages/ExerciseForm.tsx";
 import ExerciseDetails from "./pages/ExerciseDetails.tsx";
 import SetForm from "./pages/SetForm.tsx";
+import SetDetails from "./pages/SetDetails.tsx";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "workouts/:id/exercises/:exerciseId/sets/new",
         element: <SetForm />,
+      },
+      {
+        path: "workouts/:id/exercises/:exerciseId/sets/:setId",
+        element: <SetDetails />,
       },
     ],
   },
