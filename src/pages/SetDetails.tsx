@@ -1,8 +1,14 @@
-import { useParams, Link } from "react-router-dom";
-import { getSet } from "../services/fakeWorkoutService";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { getSet, deleteSet } from "../services/fakeWorkoutService";
 
 export default function SetDetails() {
   const { id, exerciseId, setId } = useParams();
+  const navigate = useNavigate();
+
+  function handleDelete() {
+    deleteSet(Number(id), Number(exerciseId), Number(setId));
+    navigate(`/workouts/${id}/exercises/${exerciseId}`);
+  }
 
   const set = getSet(Number(id), Number(exerciseId), Number(setId));
 
@@ -18,6 +24,7 @@ export default function SetDetails() {
       <Link to={`/workouts/${id}/exercises/${exerciseId}/sets/${setId}/edit`}>
         Edit
       </Link>
+      <button onClick={handleDelete}>Delete</button>
     </>
   );
 }

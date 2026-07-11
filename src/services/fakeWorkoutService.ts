@@ -214,3 +214,19 @@ export function deleteExercise(workoutId: number, exerciseId: number) {
     workout.exercises.splice(index, 1);
   }
 }
+
+export function deleteSet(
+  workoutId: number,
+  exerciseId: number,
+  setId: number,
+) {
+  const exercise = getExercise(workoutId, exerciseId);
+
+  if (!exercise) return;
+
+  const index = exercise.sets.findIndex((set) => set.id === setId);
+
+  if (index !== -1) {
+    exercise.sets.splice(index, 1);
+  }
+}
