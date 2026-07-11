@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { getWorkout, deleteExercise } from "../../services/fakeWorkoutService";
-import ExerciseList from "../../components/exercises/ExerciseList";
+import { ExerciseList } from "../../components/exercises";
 
 export default function WorkoutsDetails() {
   const { id } = useParams();

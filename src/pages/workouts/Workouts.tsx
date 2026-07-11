@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { deleteWorkout, getWorkouts } from "../../services/fakeWorkoutService";
 import type { Workout } from "../../types/types";
-import WorkoutList from "../../components/workouts/WorkoutList";
+import { WorkoutList } from "../../components/workouts";
 
 export default function Workouts() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
