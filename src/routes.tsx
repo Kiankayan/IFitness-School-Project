@@ -58,6 +58,10 @@ const router = createBrowserRouter([
         element: <SetForm />,
       },
       {
+        path: "workouts/:id/exercises/:exerciseId/sets/:setId/edit",
+        element: <SetForm />,
+      },
+      {
         path: "workouts/:id/exercises/:exerciseId/sets/:setId",
         element: <SetDetails />,
       },

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getSet } from "../services/fakeWorkoutService";
 
 export default function SetDetails() {
@@ -14,6 +14,10 @@ export default function SetDetails() {
 
       <p>Reps: {set.reps}</p>
       <p>Weight: {set.weight} kg</p>
+
+      <Link to={`/workouts/${id}/exercises/${exerciseId}/sets/${setId}/edit`}>
+        Edit
+      </Link>
     </>
   );
 }

@@ -1,9 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
-import { saveSet } from "../services/fakeWorkoutService";
+import { useState, useEffect } from "react";
+import { saveSet, getSet } from "../services/fakeWorkoutService";
 
 export default function SetForm() {
-  const { id, exerciseId } = useParams();
+  const { id, exerciseId, setId } = useParams();
 
   const workoutId = Number(id);
   const exerciseIdNumber = Number(exerciseId);
@@ -13,10 +13,25 @@ export default function SetForm() {
   const [reps, setReps] = useState(0);
   const [weight, setWeight] = useState(0);
 
+  useEffect(() => {
+    if (!setId) return;
+
+    const existingSet = getSet(workoutId, exerciseIdNumber, Number(setId));
+
+    if (existingSet) {
+      setReps(existingSet.reps);
+      setWeight(existingSet.weight);
+    }
+  }, [setId, workoutId, exerciseIdNumber]);
+
   function handleSubmit(event: any) {
     event.preventDefault();
+    const existingSet = setId
+      ? getSet(workoutId, exerciseIdNumber, Number(setId))
+      : undefined;
+
     const setToSave = {
-      id: 0,
+      id: existingSet ? existingSet.id : 0,
       reps,
       weight,
     };

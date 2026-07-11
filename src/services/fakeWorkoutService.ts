@@ -182,6 +182,15 @@ export function saveSet(workoutId: number, exerciseId: number, set: Set) {
 
   if (!exercise) return;
 
+  const setInDb = exercise.sets.find((s) => s.id === set.id);
+
+  if (setInDb) {
+    setInDb.reps = set.reps;
+    setInDb.weight = set.weight;
+
+    return setInDb;
+  }
+
   const newSet = {
     ...set,
     id: exercise.sets.length + 1,
