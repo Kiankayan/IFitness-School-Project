@@ -2,14 +2,17 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./App.tsx";
 import Home from "./pages/Home.tsx";
 import Profile from "./pages/Profile.tsx";
-import Workouts from "./pages/Workouts.tsx";
 import NotFound from "./pages/NotFound.tsx";
-import WorkoutsDetails from "./pages/WorkoutDetails.tsx";
-import WorkoutForm from "./pages/WorkoutForm.tsx";
-import ExerciseForm from "./pages/ExerciseForm.tsx";
-import ExerciseDetails from "./pages/ExerciseDetails.tsx";
-import SetForm from "./pages/SetForm.tsx";
-import SetDetails from "./pages/SetDetails.tsx";
+
+import {
+  Workouts,
+  WorkoutsDetails,
+  WorkoutForm,
+} from "./pages/workouts/index.ts";
+
+import { ExerciseForm, ExerciseDetails } from "./pages/exercises/index.ts";
+
+import { SetDetails, SetForm } from "./pages/sets/index.ts";
 
 const router = createBrowserRouter([
   {

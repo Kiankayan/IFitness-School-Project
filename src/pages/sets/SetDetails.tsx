@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { getSet, deleteSet } from "../services/fakeWorkoutService";
+import { getSet, deleteSet } from "../../services/fakeWorkoutService";
 
 export default function SetDetails() {
   const { id, exerciseId, setId } = useParams();

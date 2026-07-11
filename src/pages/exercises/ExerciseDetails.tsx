@@ -1,5 +1,5 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { getExercise } from "../services/fakeWorkoutService";
+import { getExercise } from "../../services/fakeWorkoutService";
 
 export default function ExerciseDetails() {
   const { id, exerciseId } = useParams();

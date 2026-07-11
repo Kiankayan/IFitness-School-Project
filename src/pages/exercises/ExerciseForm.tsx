@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { saveExercise, getExercise } from "../services/fakeWorkoutService";
+import { saveExercise, getExercise } from "../../services/fakeWorkoutService";
 
 export default function ExerciseForm() {
   const { id, exerciseId } = useParams();

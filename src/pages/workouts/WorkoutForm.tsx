@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { getWorkout, saveWorkout } from "../services/fakeWorkoutService";
+import { getWorkout, saveWorkout } from "../../services/fakeWorkoutService";
 import { useState } from "react";
 
 export default function WorkoutForm() {
