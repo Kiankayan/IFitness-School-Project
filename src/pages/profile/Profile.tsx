@@ -4,18 +4,18 @@ import { useState } from "react";
 function Profile() {
   const currentProfile = getProfile();
   const [name, setName] = useState(currentProfile.name);
-  const [age, setAge] = useState(currentProfile.age);
-  const [height, setHeight] = useState(currentProfile.height);
-  const [weight, setWeight] = useState(currentProfile.weight);
+  const [age, setAge] = useState(currentProfile.age.toString());
+  const [height, setHeight] = useState(currentProfile.height.toString());
+  const [weight, setWeight] = useState(currentProfile.weight.toString());
 
   function handleSubmit(event: any) {
     event.preventDefault();
     const profileToSave = {
       id: currentProfile.id,
       name,
-      age,
-      height,
-      weight,
+      age: Number(age),
+      height: Number(height),
+      weight: Number(weight),
     };
     saveProfile(profileToSave);
   }
@@ -33,19 +33,19 @@ function Profile() {
       <input
         type="number"
         value={age}
-        onChange={(e) => setAge(Number(e.target.value))}
+        onChange={(e) => setAge(e.target.value)}
       />
       <label>Height</label>
       <input
         type="number"
         value={height}
-        onChange={(e) => setHeight(Number(e.target.value))}
+        onChange={(e) => setHeight(e.target.value)}
       />
       <label>Weight</label>
       <input
         type="number"
         value={weight}
-        onChange={(e) => setWeight(Number(e.target.value))}
+        onChange={(e) => setWeight(e.target.value)}
       />
       <button type="submit">Save</button>
     </form>
