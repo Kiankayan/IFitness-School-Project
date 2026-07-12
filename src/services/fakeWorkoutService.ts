@@ -162,6 +162,7 @@ export function deleteWorkout(id: number) {
   const index = workouts.findIndex((workout) => workout.id === id);
 
   if (index !== -1) workouts.splice(index, 1);
+  saveWorkoutsToLocalStorage();
 }
 
 export function saveExercise(workoutId: number, exercise: Exercise) {
@@ -175,6 +176,8 @@ export function saveExercise(workoutId: number, exercise: Exercise) {
     exerciseInDb.name = exercise.name;
     exerciseInDb.sets = exercise.sets;
 
+    saveWorkoutsToLocalStorage();
+
     return exerciseInDb;
   }
 
@@ -184,6 +187,8 @@ export function saveExercise(workoutId: number, exercise: Exercise) {
   };
 
   workout.exercises.push(newExercise);
+
+  saveWorkoutsToLocalStorage();
 
   return newExercise;
 }
@@ -203,6 +208,8 @@ export function saveSet(workoutId: number, exerciseId: number, set: Set) {
     setInDb.reps = set.reps;
     setInDb.weight = set.weight;
 
+    saveWorkoutsToLocalStorage();
+
     return setInDb;
   }
 
@@ -212,6 +219,8 @@ export function saveSet(workoutId: number, exerciseId: number, set: Set) {
   };
 
   exercise.sets.push(newSet);
+
+  saveWorkoutsToLocalStorage();
 
   return newSet;
 }
@@ -227,6 +236,8 @@ export function deleteExercise(workoutId: number, exerciseId: number) {
 
   if (index !== -1) {
     workout.exercises.splice(index, 1);
+
+    saveWorkoutsToLocalStorage();
   }
 }
 
@@ -243,5 +254,7 @@ export function deleteSet(
 
   if (index !== -1) {
     exercise.sets.splice(index, 1);
+
+    saveWorkoutsToLocalStorage();
   }
 }
