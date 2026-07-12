@@ -140,6 +140,9 @@ export function saveWorkout(workout: Workout) {
     workoutInDb.title = workout.title;
     workoutInDb.date = workout.date;
     workoutInDb.exercises = workout.exercises;
+
+    saveWorkoutsToLocalStorage();
+
     return workoutInDb;
   }
 
@@ -149,6 +152,8 @@ export function saveWorkout(workout: Workout) {
   };
 
   workouts.push(newWorkout);
+
+  saveWorkoutsToLocalStorage();
 
   return newWorkout;
 }
