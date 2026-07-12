@@ -1,12 +1,16 @@
 import type { Profile } from "../types/types";
 
-const profile: Profile = {
-  id: 1,
-  name: "",
-  age: 0,
-  height: 0,
-  weight: 0,
-};
+const savedProfile = localStorage.getItem("profile");
+
+const profile: Profile = savedProfile
+  ? JSON.parse(savedProfile)
+  : {
+      id: 1,
+      name: "",
+      age: 0,
+      height: 0,
+      weight: 0,
+    };
 
 export default profile;
 
