@@ -1,6 +1,6 @@
 import type { Workout, Exercise, Set } from "../types/types";
 
-const workouts: Workout[] = [
+const defaultWorkouts: Workout[] = [
   {
     id: 1,
     title: "Push Day",
@@ -104,6 +104,16 @@ const workouts: Workout[] = [
     ],
   },
 ];
+
+const savedWorkouts = localStorage.getItem("workouts");
+
+const workouts: Workout[] = savedWorkouts
+  ? JSON.parse(savedWorkouts)
+  : defaultWorkouts;
+
+function saveWorkoutsToLocalStorage() {
+  localStorage.setItem("workouts", JSON.stringify(workouts));
+}
 
 export function getWorkouts() {
   return workouts;
