@@ -23,4 +23,6 @@ export function saveProfile(updatedProfile: Profile): void {
   profile.age = updatedProfile.age;
   profile.height = updatedProfile.height;
   profile.weight = updatedProfile.weight;
+
+  localStorage.setItem("profile", JSON.stringify(profile));
 }
