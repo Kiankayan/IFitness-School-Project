@@ -12,7 +12,11 @@ function NavBar(): React.ReactElement {
             <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
               <Typography variant="h6">iFitness</Typography>
             </Link>
-            <Box> Home Profile Workouts </Box>
+            <Box sx={{ display: "flex", gap: 3 }}>
+              <NavLink to="/">Home</NavLink>
+              <NavLink to="/profile">Profile</NavLink>
+              <NavLink to="/workouts">Workouts</NavLink>
+            </Box>
             <button
               className="navbar-toggler"
               type="button"
