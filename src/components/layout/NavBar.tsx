@@ -13,35 +13,33 @@ function NavBar(): React.ReactElement {
               <Typography variant="h6">iFitness</Typography>
             </Link>
             <Box sx={{ display: "flex", gap: 3 }}>
-              <NavLink to="/">Home</NavLink>
-              <NavLink to="/profile">Profile</NavLink>
-              <NavLink to="/workouts">Workouts</NavLink>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+                end
+              >
+                Home
+              </NavLink>
+
+              <NavLink
+                to="/profile"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+                Profile
+              </NavLink>
+              <NavLink
+                to="/workouts"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+                Workouts
+              </NavLink>
             </Box>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/profile">
-                    Profile
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link" to="/workouts">
-                    Workouts
-                  </NavLink>
-                </li>
-              </ul>
-            </div>
           </Box>
         </Container>
       </Toolbar>
