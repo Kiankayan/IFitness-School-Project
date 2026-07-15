@@ -10,6 +10,8 @@ import LocalFireDepartmentIcon from "@mui/icons-material/LocalFireDepartment";
 import { getWorkouts } from "../services/fakeWorkoutService";
 import type { Workout } from "../types/types";
 
+import StatCard from "../components/dashboard/StatCard";
+
 function Home() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
 
@@ -63,105 +65,27 @@ function Home() {
 
       <Grid container spacing={3} sx={{ mt: 3 }}>
         <Grid size={{ xs: 12, md: 4 }}>
-          <Paper
-            sx={{
-              p: 4,
-              borderRadius: 4,
-              height: "100%",
-              textAlign: "center",
-            }}
-          >
-            <Typography
-              variant="h2"
-              sx={{
-                fontWeight: "bold",
-              }}
-            >
-              {workouts.length}
-            </Typography>
-
-            <Typography
-              variant="h6"
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: 1,
-                mt: 2,
-              }}
-            >
-              <FitnessCenterIcon color="success" />
-              Total Workouts
-            </Typography>
-          </Paper>
+          <StatCard
+            title="Total Workouts"
+            value={workouts.length}
+            icon={<FitnessCenterIcon color="success" />}
+          />
         </Grid>
 
         <Grid size={{ xs: 12, md: 4 }}>
-          <Paper
-            sx={{
-              p: 4,
-              borderRadius: 4,
-              height: "100%",
-              textAlign: "center",
-            }}
-          >
-            <Typography
-              variant="h2"
-              sx={{
-                fontWeight: "bold",
-              }}
-            >
-              {totalExercises}
-            </Typography>
-
-            <Typography
-              variant="h6"
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: 1,
-                mt: 2,
-              }}
-            >
-              <TrendingUpIcon color="success" />
-              Total Exercises
-            </Typography>
-          </Paper>
+          <StatCard
+            title="Total Exercises"
+            value={totalExercises}
+            icon={<TrendingUpIcon color="success" />}
+          />
         </Grid>
 
         <Grid size={{ xs: 12, md: 4 }}>
-          <Paper
-            sx={{
-              p: 4,
-              borderRadius: 4,
-              height: "100%",
-              textAlign: "center",
-            }}
-          >
-            <Typography
-              variant="h2"
-              sx={{
-                fontWeight: "bold",
-              }}
-            >
-              {totalSets}
-            </Typography>
-
-            <Typography
-              variant="h6"
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: 1,
-                mt: 2,
-              }}
-            >
-              <LocalFireDepartmentIcon color="success" />
-              Total Sets
-            </Typography>
-          </Paper>
+          <StatCard
+            title="Total Sets"
+            value={totalSets}
+            icon={<LocalFireDepartmentIcon color="success" />}
+          />
         </Grid>
       </Grid>
     </Container>
