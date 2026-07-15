@@ -1,13 +1,14 @@
-import { Paper, Typography } from "@mui/material";
+import { Paper, Typography, Box } from "@mui/material";
 import type { ReactNode } from "react";
 
 interface Props {
   title: string;
   value: number;
   icon: ReactNode;
+  suffix?: string;
 }
 
-function StatCard({ title, value, icon }: Props) {
+function StatCard({ title, value, icon, suffix }: Props) {
   return (
     <Paper
       sx={{
@@ -24,6 +25,7 @@ function StatCard({ title, value, icon }: Props) {
         }}
       >
         {value}
+        {suffix}
       </Typography>
 
       <Typography
@@ -34,6 +36,7 @@ function StatCard({ title, value, icon }: Props) {
           alignItems: "center",
           gap: 1,
           mt: 2,
+          ml: -2,
         }}
       >
         {icon}

@@ -11,6 +11,8 @@ import { getWorkouts } from "../services/fakeWorkoutService";
 import type { Workout } from "../types/types";
 
 import StatCard from "../components/dashboard/StatCard";
+import SportsGymnasticsIcon from "@mui/icons-material/SportsGymnastics";
+import CheckListIcon from "@mui/icons-material/CheckList";
 
 function Home() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
@@ -33,6 +35,8 @@ function Home() {
       ),
     0,
   );
+
+  const progress = Math.min(workouts.length * 25, 100);
 
   return (
     <Container>
@@ -76,7 +80,7 @@ function Home() {
           <StatCard
             title="Total Exercises"
             value={totalExercises}
-            icon={<TrendingUpIcon color="success" />}
+            icon={<SportsGymnasticsIcon color="success" />}
           />
         </Grid>
 
@@ -84,6 +88,23 @@ function Home() {
           <StatCard
             title="Total Sets"
             value={totalSets}
+            icon={<CheckListIcon color="success" />}
+          />
+        </Grid>
+
+        <Grid size={{ xs: 12, md: 6 }}>
+          <StatCard
+            title="Progress"
+            value={progress}
+            suffix="%"
+            icon={<TrendingUpIcon color="success" />}
+          />
+        </Grid>
+
+        <Grid size={{ xs: 12, md: 6 }}>
+          <StatCard
+            title="Calories Burned"
+            value={0}
             icon={<LocalFireDepartmentIcon color="success" />}
           />
         </Grid>
