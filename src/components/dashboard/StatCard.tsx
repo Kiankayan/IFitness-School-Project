@@ -1,5 +1,5 @@
-import { Paper, Typography, Box } from "@mui/material";
-import type { ReactNode } from "react";
+import { Paper, Typography } from "@mui/material";
+import { useEffect, useState, type ReactNode } from "react";
 
 interface Props {
   title: string;
@@ -9,6 +9,24 @@ interface Props {
 }
 
 function StatCard({ title, value, icon, suffix }: Props) {
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    let current = 0;
+
+    const interval = setInterval(() => {
+      current++;
+
+      setDisplayValue(current);
+
+      if (current >= value) {
+        clearInterval(interval);
+      }
+    }, 5);
+
+    return () => clearInterval(interval);
+  }, [value]);
+
   return (
     <Paper
       sx={{
@@ -16,6 +34,12 @@ function StatCard({ title, value, icon, suffix }: Props) {
         borderRadius: 4,
         height: "100%",
         textAlign: "center",
+        transition: "all 0.25s ease",
+
+        "&:hover": {
+          transform: "translateY(-6px)",
+          boxShadow: 6,
+        },
       }}
     >
       <Typography
@@ -24,7 +48,7 @@ function StatCard({ title, value, icon, suffix }: Props) {
           fontWeight: "bold",
         }}
       >
-        {value}
+        {displayValue}
         {suffix}
       </Typography>
 
@@ -36,7 +60,6 @@ function StatCard({ title, value, icon, suffix }: Props) {
           alignItems: "center",
           gap: 1,
           mt: 2,
-          ml: -2,
         }}
       >
         {icon}

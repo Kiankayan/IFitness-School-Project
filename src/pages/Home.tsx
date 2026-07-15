@@ -37,6 +37,7 @@ function Home() {
   );
 
   const progress = Math.min(workouts.length * 25, 100);
+  const caloriesBurned = totalSets * 8;
 
   return (
     <Container>
@@ -104,7 +105,7 @@ function Home() {
         <Grid size={{ xs: 12, md: 6 }}>
           <StatCard
             title="Calories Burned"
-            value={0}
+            value={caloriesBurned}
             icon={<LocalFireDepartmentIcon color="success" />}
           />
         </Grid>
