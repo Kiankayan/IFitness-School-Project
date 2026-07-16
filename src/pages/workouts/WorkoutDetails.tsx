@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { getWorkout, deleteExercise } from "../../services/fakeWorkoutService";
 import { ExerciseList } from "../../components/exercises";
+import { Container, Paper, Typography, Button, Stack } from "@mui/material";
 
 export default function WorkoutsDetails() {
   const { id } = useParams();
@@ -22,21 +23,57 @@ export default function WorkoutsDetails() {
   }
 
   return (
-    <>
-      <h1>{workout.title}</h1>
-      <p>{workout.date}</p>
+    <Container sx={{ mt: 5 }}>
+      <Paper
+        sx={{
+          p: 4,
+          borderRadius: 4,
+          boxShadow: 3,
+        }}
+      >
+        <Stack spacing={3}>
+          <Typography
+            variant="h3"
+            sx={{
+              fontWeight: "bold",
+            }}
+          >
+            {workout.title}
+          </Typography>
 
-      <h2>Exercises</h2>
+          <Typography variant="body1" color="text.secondary">
+            {workout.date}
+          </Typography>
 
-      <button onClick={() => navigate(`/workouts/${id}/exercises/new`)}>
-        Add Exercise
-      </button>
+          <Typography
+            variant="h5"
+            sx={{
+              fontWeight: "bold",
+            }}
+          >
+            Exercises
+          </Typography>
 
-      <ExerciseList
-        exercises={exercises}
-        workoutId={workout!.id}
-        onDelete={handleDelete}
-      />
-    </>
+          <Button
+            variant="contained"
+            color="success"
+            sx={{
+              width: "fit-content",
+              borderRadius: 3,
+              px: 4,
+            }}
+            onClick={() => navigate(`/workouts/${id}/exercises/new`)}
+          >
+            Add Exercise
+          </Button>
+
+          <ExerciseList
+            exercises={exercises}
+            workoutId={workout!.id}
+            onDelete={handleDelete}
+          />
+        </Stack>
+      </Paper>
+    </Container>
   );
 }

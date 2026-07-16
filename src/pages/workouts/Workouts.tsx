@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { deleteWorkout, getWorkouts } from "../../services/fakeWorkoutService";
 import type { Workout } from "../../types/types";
 import { WorkoutList } from "../../components/workouts";
+import { Container, Typography, Button, Stack } from "@mui/material";
 
 export default function Workouts() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
@@ -19,12 +20,32 @@ export default function Workouts() {
   }
 
   return (
-    <>
-      <h1>Workouts</h1>
+    <Container sx={{ mt: 5 }}>
+      <Stack spacing={3}>
+        <Typography
+          variant="h3"
+          sx={{
+            fontWeight: "bold",
+          }}
+        >
+          Workouts
+        </Typography>
 
-      <button onClick={() => navigate("/workouts/new")}>Add Workout</button>
+        <Button
+          variant="contained"
+          color="success"
+          onClick={() => navigate("/workouts/new")}
+          sx={{
+            width: "fit-content",
+            borderRadius: 3,
+            px: 4,
+          }}
+        >
+          Add Workout
+        </Button>
 
-      <WorkoutList workouts={workouts} onDelete={handleDelete} />
-    </>
+        <WorkoutList workouts={workouts} onDelete={handleDelete} />
+      </Stack>
+    </Container>
   );
 }
