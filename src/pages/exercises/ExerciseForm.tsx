@@ -2,6 +2,15 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { saveExercise, getExercise } from "../../services/fakeWorkoutService";
 
+import {
+  Container,
+  Paper,
+  Typography,
+  TextField,
+  Button,
+  Stack,
+} from "@mui/material";
+
 export default function ExerciseForm() {
   const { id, exerciseId } = useParams();
   const workoutId = Number(id);
@@ -35,17 +44,43 @@ export default function ExerciseForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Exercise Form</h1>
+    <Container maxWidth="sm">
+      <Paper
+        sx={{
+          p: 4,
+          mt: 5,
+          borderRadius: 4,
+          boxShadow: 3,
+        }}
+      >
+        <form onSubmit={handleSubmit}>
+          <Typography variant="h4" gutterBottom>
+            Exercise Form
+          </Typography>
 
-      <label>Exercise Name</label>
-      <input
-        type="text"
-        value={exerciseName}
-        onChange={(e) => setExerciseName(e.target.value)}
-      />
+          <Typography variant="body1" sx={{ mb: 3 }}>
+            Create or edit your exercise.
+          </Typography>
 
-      <button type="submit">Save</button>
-    </form>
+          <Stack spacing={3}>
+            <TextField
+              label="Exercise Name"
+              value={exerciseName}
+              onChange={(e) => setExerciseName(e.target.value)}
+              fullWidth
+            />
+
+            <Button
+              type="submit"
+              variant="contained"
+              color="success"
+              size="large"
+            >
+              Save Exercise
+            </Button>
+          </Stack>
+        </form>
+      </Paper>
+    </Container>
   );
 }
