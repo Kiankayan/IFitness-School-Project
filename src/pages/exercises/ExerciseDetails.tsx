@@ -1,6 +1,15 @@
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { getExercise } from "../../services/fakeWorkoutService";
-import { Container, Paper, Typography, Button, Stack } from "@mui/material";
+import {
+  Container,
+  Paper,
+  Typography,
+  Button,
+  Stack,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
@@ -9,6 +18,16 @@ export default function ExerciseDetails() {
   const { id, exerciseId } = useParams();
   const exercise = getExercise(Number(id), Number(exerciseId));
   const navigate = useNavigate();
+  const location = useLocation();
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  useEffect(() => {
+    if (location.state?.setDeleted) {
+      setOpenSnackbar(true);
+
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
 
   if (!exercise) return <h1>Exercise not found</h1>;
 
@@ -40,7 +59,7 @@ export default function ExerciseDetails() {
               },
             }}
           >
-            Back to Workout
+            Back to Exercises
           </Button>
           <Typography
             variant="h4"
@@ -112,6 +131,24 @@ export default function ExerciseDetails() {
           </Stack>
         </Stack>
       </Paper>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity="success"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          Set deleted successfully!
+        </Alert>
+      </Snackbar>
     </Container>
   );
 }

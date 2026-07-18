@@ -2,7 +2,20 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { getWorkout, deleteExercise } from "../../services/fakeWorkoutService";
 import { ExerciseList } from "../../components/exercises";
-import { Container, Paper, Typography, Button, Stack } from "@mui/material";
+import {
+  Container,
+  Paper,
+  Typography,
+  Button,
+  Stack,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -14,6 +27,9 @@ export default function WorkoutsDetails() {
   const workout = getWorkout(Number(id));
 
   const [exercises, setExercises] = useState(workout ? workout.exercises : []);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [exerciseToDelete, setExerciseToDelete] = useState<number | null>(null);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   if (!workout) return <h1>Workout not found</h1>;
 
@@ -25,6 +41,10 @@ export default function WorkoutsDetails() {
     );
 
     setExercises(newExercises);
+
+    setOpenDialog(false);
+
+    setOpenSnackbar(true);
   }
 
   return (
@@ -112,10 +132,57 @@ export default function WorkoutsDetails() {
           <ExerciseList
             exercises={exercises}
             workoutId={workout!.id}
-            onDelete={handleDelete}
+            onDelete={(exerciseId) => {
+              setExerciseToDelete(exerciseId);
+              setOpenDialog(true);
+            }}
           />
         </Stack>
       </Paper>
+      <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+        <DialogTitle>Delete Exercise?</DialogTitle>
+
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this exercise? This action cannot be
+            undone.
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
+
+          <Button
+            color="error"
+            variant="contained"
+            onClick={() => {
+              if (exerciseToDelete !== null) {
+                handleDelete(exerciseToDelete);
+              }
+            }}
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity="success"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          Exercise deleted successfully!
+        </Alert>
+      </Snackbar>
     </Container>
   );
 }
