@@ -4,6 +4,9 @@ import { getWorkout, deleteExercise } from "../../services/fakeWorkoutService";
 import { ExerciseList } from "../../components/exercises";
 import { Container, Paper, Typography, Button, Stack } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 
 export default function WorkoutsDetails() {
   const { id } = useParams();
@@ -16,6 +19,7 @@ export default function WorkoutsDetails() {
 
   function handleDelete(exerciseId: number) {
     deleteExercise(workout!.id, exerciseId);
+
     const newExercises = exercises.filter(
       (exercise) => exercise.id !== exerciseId,
     );
@@ -33,22 +37,12 @@ export default function WorkoutsDetails() {
         }}
       >
         <Stack spacing={3}>
-          <Typography
-            variant="h3"
-            sx={{
-              fontWeight: "bold",
-            }}
-          >
-            {workout.title}
-          </Typography>
-
           <Button
             startIcon={<ArrowBackIcon />}
             variant="outlined"
             onClick={() => navigate(-1)}
             sx={{
               width: "fit-content",
-              mb: 3,
               borderColor: "#4E8B42",
               color: "#4E8B42",
               borderRadius: 2,
@@ -56,23 +50,49 @@ export default function WorkoutsDetails() {
               "&:hover": {
                 borderColor: "#3d6f34",
                 color: "#3d6f34",
-                backgroundColor: "rgba(78,139,66,0.08)",
+                backgroundColor: "rgba(78, 139, 66, 0.08)",
               },
             }}
           >
             Back to Workouts
           </Button>
 
-          <Typography variant="body1" color="text.secondary">
+          <Typography
+            variant="h3"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              fontWeight: "bold",
+            }}
+          >
+            <FitnessCenterIcon color="success" fontSize="large" />
+            {workout.title}
+          </Typography>
+
+          <Typography
+            variant="body1"
+            color="text.secondary"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            <CalendarMonthIcon color="success" />
             {workout.date}
           </Typography>
 
           <Typography
             variant="h5"
             sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
               fontWeight: "bold",
             }}
           >
+            <FormatListNumberedIcon color="success" />
             Exercises
           </Typography>
 

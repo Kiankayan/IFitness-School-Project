@@ -8,6 +8,8 @@ import {
   TextField,
   Button,
   Stack,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 
 export default function SetForm() {
@@ -20,6 +22,7 @@ export default function SetForm() {
 
   const [reps, setReps] = useState(0);
   const [weight, setWeight] = useState(0);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   useEffect(() => {
     if (!setId) return;
@@ -44,8 +47,16 @@ export default function SetForm() {
       weight,
     };
     saveSet(workoutId, exerciseIdNumber, setToSave);
-    navigate(`/workouts/${workoutId}/exercises/${exerciseIdNumber}`);
+
+    setOpenSnackbar(true);
+
+    setTimeout(() => {
+      navigate(`/workouts/${workoutId}/exercises/${exerciseIdNumber}`);
+    }, 1000);
   }
+  const snackbarMessage = setId
+    ? "Set updated successfully!"
+    : "Set created successfully!";
 
   return (
     <Container maxWidth="sm">
@@ -94,6 +105,24 @@ export default function SetForm() {
           </Stack>
         </form>
       </Paper>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity="success"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 }

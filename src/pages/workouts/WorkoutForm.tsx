@@ -8,6 +8,8 @@ import {
   TextField,
   Button,
   Stack,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 
 export default function WorkoutForm() {
@@ -17,6 +19,7 @@ export default function WorkoutForm() {
 
   const [title, setTitle] = useState(workout?.title || "");
   const [date, setDate] = useState(workout?.date || "");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   function handleSubmit(event: any) {
     event.preventDefault();
@@ -29,8 +32,17 @@ export default function WorkoutForm() {
     };
 
     saveWorkout(workoutToSave);
-    navigate("/workouts");
+
+    setOpenSnackbar(true);
+
+    setTimeout(() => {
+      navigate("/workouts");
+    }, 1000);
   }
+
+  const snackbarMessage = workout
+    ? "Workout updated successfully!"
+    : "Workout created successfully!";
 
   return (
     <Container maxWidth="sm">
@@ -83,6 +95,24 @@ export default function WorkoutForm() {
           </Stack>
         </form>
       </Paper>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity="success"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 }

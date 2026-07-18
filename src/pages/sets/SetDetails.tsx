@@ -2,6 +2,9 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { getSet, deleteSet } from "../../services/fakeWorkoutService";
 import { Container, Paper, Typography, Button, Stack } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import RepeatIcon from "@mui/icons-material/Repeat";
+import MonitorWeightIcon from "@mui/icons-material/MonitorWeight";
 
 export default function SetDetails() {
   const { id, exerciseId, setId } = useParams();
@@ -49,15 +52,37 @@ export default function SetDetails() {
           <Typography
             variant="h4"
             sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
               fontWeight: "bold",
             }}
           >
+            <FitnessCenterIcon color="success" />
             Set Details
           </Typography>
 
-          <Typography variant="h6">Reps: {set.reps}</Typography>
+          <Typography
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            <RepeatIcon color="success" />
+            {set.reps} reps
+          </Typography>
 
-          <Typography variant="h6">Weight: {set.weight} kg</Typography>
+          <Typography
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            <MonitorWeightIcon color="success" />
+            {set.weight} kg
+          </Typography>
 
           <Stack direction="row" spacing={2}>
             <Button

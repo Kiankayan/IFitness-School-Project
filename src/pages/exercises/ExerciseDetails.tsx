@@ -2,6 +2,8 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { getExercise } from "../../services/fakeWorkoutService";
 import { Container, Paper, Typography, Button, Stack } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 
 export default function ExerciseDetails() {
   const { id, exerciseId } = useParams();
@@ -41,20 +43,27 @@ export default function ExerciseDetails() {
             Back to Workout
           </Button>
           <Typography
-            variant="h3"
+            variant="h4"
             sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
               fontWeight: "bold",
             }}
           >
+            <FitnessCenterIcon color="success" />
             {exercise.name}
           </Typography>
-
           <Typography
             variant="h5"
             sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
               fontWeight: "bold",
             }}
           >
+            <FormatListNumberedIcon color="success" />
             Sets
           </Typography>
 
