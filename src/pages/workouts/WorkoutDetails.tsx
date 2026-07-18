@@ -3,6 +3,7 @@ import { useState } from "react";
 import { getWorkout, deleteExercise } from "../../services/fakeWorkoutService";
 import { ExerciseList } from "../../components/exercises";
 import { Container, Paper, Typography, Button, Stack } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function WorkoutsDetails() {
   const { id } = useParams();
@@ -40,6 +41,27 @@ export default function WorkoutsDetails() {
           >
             {workout.title}
           </Typography>
+
+          <Button
+            startIcon={<ArrowBackIcon />}
+            variant="outlined"
+            onClick={() => navigate(-1)}
+            sx={{
+              width: "fit-content",
+              mb: 3,
+              borderColor: "#4E8B42",
+              color: "#4E8B42",
+              borderRadius: 2,
+
+              "&:hover": {
+                borderColor: "#3d6f34",
+                color: "#3d6f34",
+                backgroundColor: "rgba(78,139,66,0.08)",
+              },
+            }}
+          >
+            Back to Workouts
+          </Button>
 
           <Typography variant="body1" color="text.secondary">
             {workout.date}

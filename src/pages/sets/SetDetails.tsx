@@ -1,6 +1,7 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { getSet, deleteSet } from "../../services/fakeWorkoutService";
 import { Container, Paper, Typography, Button, Stack } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 export default function SetDetails() {
   const { id, exerciseId, setId } = useParams();
@@ -25,6 +26,26 @@ export default function SetDetails() {
         }}
       >
         <Stack spacing={3}>
+          <Button
+            startIcon={<ArrowBackIcon />}
+            variant="outlined"
+            onClick={() => navigate(-1)}
+            sx={{
+              width: "fit-content",
+              mb: 3,
+              borderColor: "#4E8B42",
+              color: "#4E8B42",
+              borderRadius: 2,
+
+              "&:hover": {
+                borderColor: "#3d6f34",
+                color: "#3d6f34",
+                backgroundColor: "rgba(78,139,66,0.08)",
+              },
+            }}
+          >
+            Back To Exercise
+          </Button>
           <Typography
             variant="h4"
             sx={{
