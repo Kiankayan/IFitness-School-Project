@@ -129,14 +129,42 @@ export default function WorkoutsDetails() {
             Add Exercise
           </Button>
 
-          <ExerciseList
-            exercises={exercises}
-            workoutId={workout!.id}
-            onDelete={(exerciseId) => {
-              setExerciseToDelete(exerciseId);
-              setOpenDialog(true);
-            }}
-          />
+          {exercises.length === 0 ? (
+            <Paper
+              sx={{
+                p: 6,
+                mt: 2,
+                borderRadius: 4,
+                boxShadow: 2,
+                textAlign: "center",
+              }}
+            >
+              <FitnessCenterIcon
+                color="success"
+                sx={{
+                  fontSize: 70,
+                  mb: 2,
+                }}
+              />
+
+              <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
+                No exercises yet
+              </Typography>
+
+              <Typography variant="body1" color="text.secondary">
+                Add your first exercise to start building this workout.
+              </Typography>
+            </Paper>
+          ) : (
+            <ExerciseList
+              exercises={exercises}
+              workoutId={workout.id}
+              onDelete={(exerciseId) => {
+                setExerciseToDelete(exerciseId);
+                setOpenDialog(true);
+              }}
+            />
+          )}
         </Stack>
       </Paper>
       <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
