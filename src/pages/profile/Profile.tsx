@@ -10,6 +10,8 @@ import {
   Button,
   Stack,
   Avatar,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 
 function Profile() {
@@ -18,6 +20,7 @@ function Profile() {
   const [age, setAge] = useState(currentProfile.age.toString());
   const [height, setHeight] = useState(currentProfile.height.toString());
   const [weight, setWeight] = useState(currentProfile.weight.toString());
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   function handleSubmit(event: any) {
     event.preventDefault();
@@ -29,6 +32,8 @@ function Profile() {
       weight: Number(weight),
     };
     saveProfile(profileToSave);
+
+    setOpenSnackbar(true);
   }
 
   return (
@@ -104,6 +109,24 @@ function Profile() {
           </Stack>
         </form>
       </Paper>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity="success"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          Profile saved successfully!
+        </Alert>
+      </Snackbar>
     </Container>
   );
 }
