@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { deleteWorkout, getWorkouts } from "../../services/fakeWorkoutService";
 import type { Workout } from "../../types/types";
 import { WorkoutList } from "../../components/workouts";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import {
   Container,
+  Paper,
   Typography,
   Button,
   Stack,
@@ -20,6 +22,7 @@ import {
 export default function Workouts() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const navigate = useNavigate();
+
   const [openDialog, setOpenDialog] = useState(false);
   const [workoutToDelete, setWorkoutToDelete] = useState<number | null>(null);
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -62,14 +65,43 @@ export default function Workouts() {
           Add Workout
         </Button>
 
-        <WorkoutList
-          workouts={workouts}
-          onDelete={(id) => {
-            setWorkoutToDelete(id);
-            setOpenDialog(true);
-          }}
-        />
+        {workouts.length === 0 ? (
+          <Paper
+            sx={{
+              p: 6,
+              mt: 3,
+              borderRadius: 4,
+              boxShadow: 2,
+              textAlign: "center",
+            }}
+          >
+            <FitnessCenterIcon
+              color="success"
+              sx={{
+                fontSize: 70,
+                mb: 2,
+              }}
+            />
+
+            <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
+              No workouts yet
+            </Typography>
+
+            <Typography variant="body1" color="text.secondary">
+              Create your first workout to start tracking your progress.
+            </Typography>
+          </Paper>
+        ) : (
+          <WorkoutList
+            workouts={workouts}
+            onDelete={(id) => {
+              setWorkoutToDelete(id);
+              setOpenDialog(true);
+            }}
+          />
+        )}
       </Stack>
+
       <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
         <DialogTitle>Delete Workout?</DialogTitle>
 
@@ -97,6 +129,7 @@ export default function Workouts() {
           </Button>
         </DialogActions>
       </Dialog>
+
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}
