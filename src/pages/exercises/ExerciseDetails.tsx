@@ -101,34 +101,62 @@ export default function ExerciseDetails() {
             Add Set
           </Button>
 
-          <Stack spacing={2}>
-            {exercise.sets.map((set) => (
-              <Paper
-                key={set.id}
-                onClick={() =>
-                  navigate(
-                    `/workouts/${id}/exercises/${exerciseId}/sets/${set.id}`,
-                  )
-                }
+          {exercise.sets.length === 0 ? (
+            <Paper
+              sx={{
+                p: 6,
+                mt: 2,
+                borderRadius: 4,
+                boxShadow: 2,
+                textAlign: "center",
+              }}
+            >
+              <FitnessCenterIcon
+                color="success"
                 sx={{
-                  p: 2,
-                  borderRadius: 3,
-                  boxShadow: 2,
-                  transition: "all 0.25s ease",
-                  cursor: "pointer",
-
-                  "&:hover": {
-                    transform: "translateY(-3px)",
-                    boxShadow: 4,
-                  },
+                  fontSize: 70,
+                  mb: 2,
                 }}
-              >
-                <Typography variant="body1">
-                  {set.reps} reps × {set.weight} kg
-                </Typography>
-              </Paper>
-            ))}
-          </Stack>
+              />
+
+              <Typography variant="h5" sx={{ fontWeight: "bold" }} gutterBottom>
+                No sets yet
+              </Typography>
+
+              <Typography variant="body1" color="text.secondary">
+                Add your first set to start tracking your progress.
+              </Typography>
+            </Paper>
+          ) : (
+            <Stack spacing={2}>
+              {exercise.sets.map((set) => (
+                <Paper
+                  key={set.id}
+                  onClick={() =>
+                    navigate(
+                      `/workouts/${id}/exercises/${exerciseId}/sets/${set.id}`,
+                    )
+                  }
+                  sx={{
+                    p: 2,
+                    borderRadius: 3,
+                    boxShadow: 2,
+                    transition: "all 0.25s ease",
+                    cursor: "pointer",
+
+                    "&:hover": {
+                      transform: "translateY(-3px)",
+                      boxShadow: 4,
+                    },
+                  }}
+                >
+                  <Typography variant="body1">
+                    {set.reps} reps × {set.weight} kg
+                  </Typography>
+                </Paper>
+              ))}
+            </Stack>
+          )}
         </Stack>
       </Paper>
       <Snackbar
