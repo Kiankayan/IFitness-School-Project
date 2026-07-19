@@ -52,7 +52,7 @@ export default function SetDetails() {
           <Button
             startIcon={<ArrowBackIcon />}
             variant="outlined"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate(`/workouts/${id}/exercises/${exerciseId}`)}
             sx={{
               width: "fit-content",
               mb: 3,

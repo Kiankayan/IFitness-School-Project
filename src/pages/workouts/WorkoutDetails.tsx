@@ -60,7 +60,7 @@ export default function WorkoutsDetails() {
           <Button
             startIcon={<ArrowBackIcon />}
             variant="outlined"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/workouts")}
             sx={{
               width: "fit-content",
               borderColor: "#4E8B42",

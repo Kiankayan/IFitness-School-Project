@@ -24,8 +24,6 @@ export default function ExerciseDetails() {
   useEffect(() => {
     if (location.state?.setDeleted) {
       setOpenSnackbar(true);
-
-      window.history.replaceState({}, document.title);
     }
   }, [location.state]);
 
@@ -44,7 +42,7 @@ export default function ExerciseDetails() {
           <Button
             startIcon={<ArrowBackIcon />}
             variant="outlined"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate(`/workouts/${id}`)}
             sx={{
               width: "fit-content",
               mb: 3,
