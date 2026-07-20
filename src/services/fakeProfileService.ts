@@ -26,3 +26,12 @@ export function saveProfile(updatedProfile: Profile): void {
 
   localStorage.setItem("profile", JSON.stringify(profile));
 }
+
+export function clearProfile(): void {
+  profile.name = "";
+  profile.age = 0;
+  profile.height = 0;
+  profile.weight = 0;
+
+  localStorage.removeItem("profile");
+}

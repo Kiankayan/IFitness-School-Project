@@ -1,4 +1,8 @@
-import { getProfile, saveProfile } from "../../services/fakeProfileService";
+import {
+  getProfile,
+  saveProfile,
+  clearProfile,
+} from "../../services/fakeProfileService";
 import { useState } from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import SaveIcon from "@mui/icons-material/Save";
@@ -72,7 +76,7 @@ function Profile() {
     setHeight("");
     setWeight("");
 
-    localStorage.removeItem("profile");
+    clearProfile();
 
     setErrors({
       name: false,
