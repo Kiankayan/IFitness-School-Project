@@ -2,6 +2,7 @@ import { getProfile, saveProfile } from "../../services/fakeProfileService";
 import { useState } from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import SaveIcon from "@mui/icons-material/Save";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import {
   Container,
@@ -17,12 +18,15 @@ import {
 
 function Profile() {
   const currentProfile = getProfile();
+
   const [name, setName] = useState(currentProfile.name);
   const [age, setAge] = useState(currentProfile.age.toString());
   const [height, setHeight] = useState(currentProfile.height.toString());
   const [weight, setWeight] = useState(currentProfile.weight.toString());
+
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
   const [errors, setErrors] = useState({
     name: false,
@@ -55,8 +59,29 @@ function Profile() {
       height: Number(height),
       weight: Number(weight),
     };
+
     saveProfile(profileToSave);
 
+    setSnackbarMessage("Profile saved successfully!");
+    setOpenSnackbar(true);
+  }
+
+  function handleClearProfile() {
+    setName("");
+    setAge("");
+    setHeight("");
+    setWeight("");
+
+    localStorage.removeItem("profile");
+
+    setErrors({
+      name: false,
+      age: false,
+      height: false,
+      weight: false,
+    });
+
+    setSnackbarMessage("Profile cleared successfully!");
     setOpenSnackbar(true);
   }
 
@@ -82,6 +107,7 @@ function Profile() {
           >
             <PersonIcon fontSize="large" />
           </Avatar>
+
           <Typography variant="h4" gutterBottom>
             Profile
           </Typography>
@@ -183,6 +209,17 @@ function Profile() {
             >
               Save Profile
             </Button>
+
+            <Button
+              type="button"
+              variant="outlined"
+              color="error"
+              size="large"
+              startIcon={<DeleteIcon />}
+              onClick={handleClearProfile}
+            >
+              Clear Profile
+            </Button>
           </Stack>
         </form>
       </Paper>
@@ -221,10 +258,11 @@ function Profile() {
           variant="filled"
           sx={{ width: "100%" }}
         >
-          Profile saved successfully!
+          {snackbarMessage}
         </Alert>
       </Snackbar>
     </Container>
   );
 }
+
 export default Profile;
