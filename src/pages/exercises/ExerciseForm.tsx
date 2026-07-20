@@ -142,7 +142,7 @@ export default function ExerciseForm() {
           variant="filled"
           sx={{ width: "100%" }}
         >
-          Please fill in all required fields.
+          Please fill in the required field.
         </Alert>
       </Snackbar>
       <Snackbar
