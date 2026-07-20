@@ -22,10 +22,37 @@ export default function WorkoutForm() {
 
   const [title, setTitle] = useState(workout?.title || "");
   const [date, setDate] = useState(workout?.date || "");
+
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
+
+  const [errors, setErrors] = useState({
+    title: "",
+    date: "",
+  });
 
   function handleSubmit(event: any) {
     event.preventDefault();
+
+    const newErrors = {
+      title: "",
+      date: "",
+    };
+
+    if (!title.trim()) {
+      newErrors.title = "Workout title is required.";
+    }
+
+    if (!date) {
+      newErrors.date = "Date is required.";
+    }
+
+    setErrors(newErrors);
+
+    if (newErrors.title || newErrors.date) {
+      setOpenErrorSnackbar(true);
+      return;
+    }
 
     const workoutToSave = {
       id: workout?.id || 0,
@@ -70,7 +97,18 @@ export default function WorkoutForm() {
             <TextField
               label="Workout Title"
               value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => {
+                setTitle(e.target.value);
+
+                if (errors.title) {
+                  setErrors({
+                    ...errors,
+                    title: "",
+                  });
+                }
+              }}
+              error={!!errors.title}
+              helperText={errors.title}
               fullWidth
             />
 
@@ -78,7 +116,18 @@ export default function WorkoutForm() {
               label="Date"
               type="date"
               value={date}
-              onChange={(e) => setDate(e.target.value)}
+              onChange={(e) => {
+                setDate(e.target.value);
+
+                if (errors.date) {
+                  setErrors({
+                    ...errors,
+                    date: "",
+                  });
+                }
+              }}
+              error={!!errors.date}
+              helperText={errors.date}
               fullWidth
               slotProps={{
                 inputLabel: {
@@ -99,6 +148,25 @@ export default function WorkoutForm() {
           </Stack>
         </form>
       </Paper>
+      <Snackbar
+        open={openErrorSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenErrorSnackbar(false)}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+      >
+        <Alert
+          onClose={() => setOpenErrorSnackbar(false)}
+          severity="error"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          Please fill in all required fields.
+        </Alert>
+      </Snackbar>
+
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}
