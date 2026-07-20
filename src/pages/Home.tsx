@@ -39,7 +39,7 @@ function Home() {
     0,
   );
 
-  const progress = Math.min(workouts.length * 25, 100);
+  const progress = Math.min(workouts.length * 10, 100);
   const caloriesBurned = totalSets * 8;
 
   return (

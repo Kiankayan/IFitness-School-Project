@@ -12,6 +12,11 @@ function StatCard({ title, value, icon, suffix }: Props) {
   const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {
+    if (value === 0) {
+      setDisplayValue(0);
+      return;
+    }
+
     let current = 0;
 
     const interval = setInterval(() => {
