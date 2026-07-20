@@ -21,6 +21,11 @@ export default function ExerciseForm() {
   const navigate = useNavigate();
   const [exerciseName, setExerciseName] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
+
+  const [errors, setErrors] = useState({
+    exerciseName: "",
+  });
 
   useEffect(() => {
     if (!exerciseId) return;
@@ -33,6 +38,21 @@ export default function ExerciseForm() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
+
+    const newErrors = {
+      exerciseName: "",
+    };
+
+    if (!exerciseName.trim()) {
+      newErrors.exerciseName = "Exercise name is required.";
+    }
+
+    setErrors(newErrors);
+
+    if (newErrors.exerciseName) {
+      setOpenErrorSnackbar(true);
+      return;
+    }
 
     const existingExercise = exerciseId
       ? getExercise(workoutId, Number(exerciseId))
@@ -80,7 +100,18 @@ export default function ExerciseForm() {
             <TextField
               label="Exercise Name"
               value={exerciseName}
-              onChange={(e) => setExerciseName(e.target.value)}
+              onChange={(e) => {
+                setExerciseName(e.target.value);
+
+                if (errors.exerciseName) {
+                  setErrors({
+                    ...errors,
+                    exerciseName: "",
+                  });
+                }
+              }}
+              error={!!errors.exerciseName}
+              helperText={errors.exerciseName}
               fullWidth
             />
 
@@ -96,6 +127,24 @@ export default function ExerciseForm() {
           </Stack>
         </form>
       </Paper>
+      <Snackbar
+        open={openErrorSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenErrorSnackbar(false)}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+      >
+        <Alert
+          onClose={() => setOpenErrorSnackbar(false)}
+          severity="error"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          Please fill in all required fields.
+        </Alert>
+      </Snackbar>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}
