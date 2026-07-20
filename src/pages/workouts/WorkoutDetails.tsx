@@ -31,7 +31,55 @@ export default function WorkoutsDetails() {
   const [exerciseToDelete, setExerciseToDelete] = useState<number | null>(null);
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  if (!workout) return <h1>Workout not found</h1>;
+  if (!workout)
+    return (
+      <Container maxWidth="sm" sx={{ mt: 8 }}>
+        <Paper
+          sx={{
+            p: 6,
+            textAlign: "center",
+            borderRadius: 4,
+            boxShadow: 3,
+          }}
+        >
+          <FitnessCenterIcon
+            color="disabled"
+            sx={{
+              fontSize: 80,
+              mb: 2,
+            }}
+          />
+
+          <Typography
+            variant="h4"
+            sx={{
+              fontWeight: "bold",
+              mb: 2,
+            }}
+          >
+            Workout not found
+          </Typography>
+
+          <Typography
+            color="text.secondary"
+            sx={{
+              mb: 4,
+            }}
+          >
+            The workout you're looking for doesn't exist or may have been
+            deleted.
+          </Typography>
+
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => navigate("/workouts")}
+          >
+            Back to Workouts
+          </Button>
+        </Paper>
+      </Container>
+    );
 
   function handleDelete(exerciseId: number) {
     deleteExercise(workout!.id, exerciseId);

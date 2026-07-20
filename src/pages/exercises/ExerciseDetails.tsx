@@ -27,7 +27,55 @@ export default function ExerciseDetails() {
     }
   }, [location.state]);
 
-  if (!exercise) return <h1>Exercise not found</h1>;
+  if (!exercise)
+    return (
+      <Container maxWidth="sm" sx={{ mt: 8 }}>
+        <Paper
+          sx={{
+            p: 6,
+            textAlign: "center",
+            borderRadius: 4,
+            boxShadow: 3,
+          }}
+        >
+          <FitnessCenterIcon
+            color="disabled"
+            sx={{
+              fontSize: 80,
+              mb: 2,
+            }}
+          />
+
+          <Typography
+            variant="h4"
+            sx={{
+              fontWeight: "bold",
+              mb: 2,
+            }}
+          >
+            Exercise not found
+          </Typography>
+
+          <Typography
+            color="text.secondary"
+            sx={{
+              mb: 4,
+            }}
+          >
+            The exercise you're looking for doesn't exist or may have been
+            deleted.
+          </Typography>
+
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => navigate(`/workouts/${id}`)}
+          >
+            Back to Workout
+          </Button>
+        </Paper>
+      </Container>
+    );
 
   return (
     <Container sx={{ mt: 5 }}>

@@ -37,7 +37,54 @@ export default function SetDetails() {
 
   const set = getSet(Number(id), Number(exerciseId), Number(setId));
 
-  if (!set) return <h1>Set not found</h1>;
+  if (!set)
+    return (
+      <Container maxWidth="sm" sx={{ mt: 8 }}>
+        <Paper
+          sx={{
+            p: 6,
+            textAlign: "center",
+            borderRadius: 4,
+            boxShadow: 3,
+          }}
+        >
+          <FitnessCenterIcon
+            color="disabled"
+            sx={{
+              fontSize: 80,
+              mb: 2,
+            }}
+          />
+
+          <Typography
+            variant="h4"
+            sx={{
+              fontWeight: "bold",
+              mb: 2,
+            }}
+          >
+            Set not found
+          </Typography>
+
+          <Typography
+            color="text.secondary"
+            sx={{
+              mb: 4,
+            }}
+          >
+            The set you're looking for doesn't exist or may have been deleted.
+          </Typography>
+
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => navigate(`/workouts/${id}/exercises/${exerciseId}`)}
+          >
+            Back to Exercise
+          </Button>
+        </Paper>
+      </Container>
+    );
 
   return (
     <Container maxWidth="sm" sx={{ mt: 5 }}>
