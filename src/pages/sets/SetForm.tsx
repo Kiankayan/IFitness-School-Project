@@ -24,7 +24,14 @@ export default function SetForm() {
 
   const [reps, setReps] = useState(0);
   const [weight, setWeight] = useState(0);
+
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
+
+  const [errors, setErrors] = useState({
+    reps: "",
+    weight: "",
+  });
 
   useEffect(() => {
     if (!setId) return;
@@ -39,6 +46,25 @@ export default function SetForm() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
+    const newErrors = {
+      reps: "",
+      weight: "",
+    };
+
+    if (reps <= 0) {
+      newErrors.reps = "Reps must be greater than 0.";
+    }
+
+    if (weight < 0) {
+      newErrors.weight = "Weight cannot be negative.";
+    }
+
+    setErrors(newErrors);
+
+    if (newErrors.reps || newErrors.weight) {
+      setOpenErrorSnackbar(true);
+      return;
+    }
     const existingSet = setId
       ? getSet(workoutId, exerciseIdNumber, Number(setId))
       : undefined;
@@ -84,7 +110,18 @@ export default function SetForm() {
               label="Reps"
               type="number"
               value={reps}
-              onChange={(e) => setReps(Number(e.target.value))}
+              onChange={(e) => {
+                setReps(Number(e.target.value));
+
+                if (errors.reps) {
+                  setErrors({
+                    ...errors,
+                    reps: "",
+                  });
+                }
+              }}
+              error={!!errors.reps}
+              helperText={errors.reps}
               fullWidth
             />
 
@@ -92,7 +129,18 @@ export default function SetForm() {
               label="Weight (kg)"
               type="number"
               value={weight}
-              onChange={(e) => setWeight(Number(e.target.value))}
+              onChange={(e) => {
+                setWeight(Number(e.target.value));
+
+                if (errors.weight) {
+                  setErrors({
+                    ...errors,
+                    weight: "",
+                  });
+                }
+              }}
+              error={!!errors.weight}
+              helperText={errors.weight}
               fullWidth
             />
 
@@ -108,6 +156,24 @@ export default function SetForm() {
           </Stack>
         </form>
       </Paper>
+      <Snackbar
+        open={openErrorSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenErrorSnackbar(false)}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+      >
+        <Alert
+          onClose={() => setOpenErrorSnackbar(false)}
+          severity="error"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          Please fill in all required fields.
+        </Alert>
+      </Snackbar>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}
