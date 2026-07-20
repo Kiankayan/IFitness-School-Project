@@ -18,6 +18,11 @@ import {
   Avatar,
   Snackbar,
   Alert,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from "@mui/material";
 
 function Profile() {
@@ -31,6 +36,7 @@ function Profile() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [openDialog, setOpenDialog] = useState(false);
 
   const [errors, setErrors] = useState({
     name: false,
@@ -220,7 +226,7 @@ function Profile() {
               color="error"
               size="large"
               startIcon={<DeleteIcon />}
-              onClick={handleClearProfile}
+              onClick={() => setOpenDialog(true)}
             >
               Clear Profile
             </Button>
@@ -265,6 +271,32 @@ function Profile() {
           {snackbarMessage}
         </Alert>
       </Snackbar>
+      <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+        <DialogTitle>Clear Profile</DialogTitle>
+
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to clear your profile?
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogActions>
+          <Button color="success" onClick={() => setOpenDialog(false)}>
+            Cancel
+          </Button>
+
+          <Button
+            color="error"
+            variant="contained"
+            onClick={() => {
+              handleClearProfile();
+              setOpenDialog(false);
+            }}
+          >
+            Clear
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }
