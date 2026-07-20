@@ -13,9 +13,12 @@ import type { Workout } from "../types/types";
 import StatCard from "../components/dashboard/StatCard";
 import SportsGymnasticsIcon from "@mui/icons-material/SportsGymnastics";
 import CheckListIcon from "@mui/icons-material/CheckList";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setWorkouts(getWorkouts());
@@ -58,6 +61,7 @@ function Home() {
         <Button
           variant="contained"
           color="success"
+          onClick={() => navigate("/workouts")}
           sx={{
             mt: 3,
             borderRadius: 3,
