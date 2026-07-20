@@ -1,6 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { saveSet, getSet } from "../../services/fakeWorkoutService";
+import AddIcon from "@mui/icons-material/Add";
+import UpdateIcon from "@mui/icons-material/Update";
 import {
   Container,
   Paper,
@@ -56,7 +58,7 @@ export default function SetForm() {
   }
   const snackbarMessage = setId
     ? "Set updated successfully!"
-    : "Set created successfully!";
+    : "Set added successfully!";
 
   return (
     <Container maxWidth="sm">
@@ -74,7 +76,7 @@ export default function SetForm() {
           </Typography>
 
           <Typography variant="body1" sx={{ mb: 3 }}>
-            Create or edit your set.
+            Add or update your set.
           </Typography>
 
           <Stack spacing={3}>
@@ -99,8 +101,9 @@ export default function SetForm() {
               variant="contained"
               color="success"
               size="large"
+              startIcon={setId ? <UpdateIcon /> : <AddIcon />}
             >
-              Save Set
+              {setId ? "Update Set" : "Add Set"}
             </Button>
           </Stack>
         </form>

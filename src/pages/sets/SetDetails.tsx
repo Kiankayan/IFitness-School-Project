@@ -17,6 +17,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import RepeatIcon from "@mui/icons-material/Repeat";
 import MonitorWeightIcon from "@mui/icons-material/MonitorWeight";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function SetDetails() {
   const { id, exerciseId, setId } = useParams();
@@ -77,6 +79,7 @@ export default function SetDetails() {
 
           <Button
             variant="contained"
+            startIcon={<ArrowBackIcon />}
             color="success"
             onClick={() => navigate(`/workouts/${id}/exercises/${exerciseId}`)}
           >
@@ -156,7 +159,8 @@ export default function SetDetails() {
               component={Link}
               to={`/workouts/${id}/exercises/${exerciseId}/sets/${setId}/edit`}
               variant="contained"
-              color="primary"
+              color="success"
+              startIcon={<EditIcon />}
             >
               Edit
             </Button>
@@ -164,6 +168,7 @@ export default function SetDetails() {
             <Button
               variant="contained"
               color="error"
+              startIcon={<DeleteIcon />}
               onClick={() => setOpenDialog(true)}
             >
               Delete
@@ -182,7 +187,9 @@ export default function SetDetails() {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
+          <Button color="success" onClick={() => setOpenDialog(false)}>
+            Cancel
+          </Button>
 
           <Button color="error" variant="contained" onClick={handleDelete}>
             Delete

@@ -1,6 +1,7 @@
 import { getProfile, saveProfile } from "../../services/fakeProfileService";
 import { useState } from "react";
 import PersonIcon from "@mui/icons-material/Person";
+import SaveIcon from "@mui/icons-material/Save";
 
 import {
   Container,
@@ -103,6 +104,7 @@ function Profile() {
               variant="contained"
               color="success"
               size="large"
+              startIcon={<SaveIcon />}
             >
               Save Profile
             </Button>

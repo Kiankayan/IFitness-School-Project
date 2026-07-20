@@ -20,6 +20,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
+import AddIcon from "@mui/icons-material/Add";
 
 export default function WorkoutsDetails() {
   const { id } = useParams();
@@ -72,6 +73,7 @@ export default function WorkoutsDetails() {
 
           <Button
             variant="contained"
+            startIcon={<ArrowBackIcon />}
             color="success"
             onClick={() => navigate("/workouts")}
           >
@@ -167,6 +169,7 @@ export default function WorkoutsDetails() {
           <Button
             variant="contained"
             color="success"
+            startIcon={<AddIcon />}
             sx={{
               width: "fit-content",
               borderRadius: 3,
@@ -226,7 +229,9 @@ export default function WorkoutsDetails() {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
+          <Button color="success" onClick={() => setOpenDialog(false)}>
+            Cancel
+          </Button>
 
           <Button
             color="error"

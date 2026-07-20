@@ -1,5 +1,7 @@
 import { type Exercise } from "../../types/types";
 import { Link, useNavigate } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import {
   Card,
@@ -81,7 +83,8 @@ export default function ExerciseCard({ exercise, workoutId, onDelete }: Props) {
           component={Link}
           to={`/workouts/${workoutId}/exercises/${exercise.id}/edit`}
           variant="contained"
-          color="primary"
+          color="success"
+          startIcon={<EditIcon />}
           onClick={(event) => event.stopPropagation()}
         >
           Edit
@@ -90,6 +93,7 @@ export default function ExerciseCard({ exercise, workoutId, onDelete }: Props) {
         <Button
           variant="contained"
           color="error"
+          startIcon={<DeleteIcon />}
           onClick={(event) => {
             event.stopPropagation();
             handleDelete();

@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 interface Props {
   workout: Workout;
@@ -100,7 +102,8 @@ export default function WorkoutCard({ workout, onDelete }: Props) {
           component={Link}
           to={`/workouts/${workout.id}/edit`}
           variant="contained"
-          color="primary"
+          color="success"
+          startIcon={<EditIcon />}
           onClick={(event) => event.stopPropagation()}
         >
           Edit
@@ -109,6 +112,7 @@ export default function WorkoutCard({ workout, onDelete }: Props) {
         <Button
           variant="contained"
           color="error"
+          startIcon={<DeleteIcon />}
           onClick={(event) => {
             event.stopPropagation();
             onDelete(workout.id);

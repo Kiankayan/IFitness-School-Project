@@ -1,6 +1,9 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { getWorkout, saveWorkout } from "../../services/fakeWorkoutService";
 import { useState } from "react";
+import AddIcon from "@mui/icons-material/Add";
+import UpdateIcon from "@mui/icons-material/Update";
+
 import {
   Container,
   Paper,
@@ -42,7 +45,7 @@ export default function WorkoutForm() {
 
   const snackbarMessage = workout
     ? "Workout updated successfully!"
-    : "Workout created successfully!";
+    : "Workout added successfully!";
 
   return (
     <Container maxWidth="sm">
@@ -60,7 +63,7 @@ export default function WorkoutForm() {
           </Typography>
 
           <Typography variant="body1" sx={{ mb: 3 }}>
-            Create or edit your workout.
+            Add or update your workout.
           </Typography>
 
           <Stack spacing={3}>
@@ -89,8 +92,9 @@ export default function WorkoutForm() {
               variant="contained"
               color="success"
               size="large"
+              startIcon={workout ? <UpdateIcon /> : <AddIcon />}
             >
-              Save Workout
+              {workout ? "Update Workout" : "Add Workout"}
             </Button>
           </Stack>
         </form>

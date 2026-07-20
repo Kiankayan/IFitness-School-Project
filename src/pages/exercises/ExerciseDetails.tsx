@@ -13,6 +13,7 @@ import {
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
+import AddIcon from "@mui/icons-material/Add";
 
 export default function ExerciseDetails() {
   const { id, exerciseId } = useParams();
@@ -68,6 +69,7 @@ export default function ExerciseDetails() {
 
           <Button
             variant="contained"
+            startIcon={<ArrowBackIcon />}
             color="success"
             onClick={() => navigate(`/workouts/${id}`)}
           >
@@ -135,6 +137,7 @@ export default function ExerciseDetails() {
           <Button
             variant="contained"
             color="success"
+            startIcon={<AddIcon />}
             sx={{
               width: "fit-content",
               borderRadius: 3,

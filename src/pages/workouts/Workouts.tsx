@@ -4,6 +4,7 @@ import { deleteWorkout, getWorkouts } from "../../services/fakeWorkoutService";
 import type { Workout } from "../../types/types";
 import { WorkoutList } from "../../components/workouts";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import AddIcon from "@mui/icons-material/Add";
 import {
   Container,
   Paper,
@@ -55,6 +56,7 @@ export default function Workouts() {
         <Button
           variant="contained"
           color="success"
+          startIcon={<AddIcon />}
           onClick={() => navigate("/workouts/new")}
           sx={{
             width: "fit-content",
@@ -113,7 +115,9 @@ export default function Workouts() {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
+          <Button color="success" onClick={() => setOpenDialog(false)}>
+            Cancel
+          </Button>
 
           <Button
             color="error"

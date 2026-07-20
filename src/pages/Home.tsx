@@ -14,6 +14,7 @@ import StatCard from "../components/dashboard/StatCard";
 import SportsGymnasticsIcon from "@mui/icons-material/SportsGymnastics";
 import CheckListIcon from "@mui/icons-material/CheckList";
 import { useNavigate } from "react-router-dom";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
 function Home() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
@@ -61,6 +62,7 @@ function Home() {
         <Button
           variant="contained"
           color="success"
+          startIcon={<PlayArrowIcon />}
           onClick={() => navigate("/workouts")}
           sx={{
             mt: 3,
