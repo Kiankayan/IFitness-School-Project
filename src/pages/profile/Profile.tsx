@@ -22,9 +22,32 @@ function Profile() {
   const [height, setHeight] = useState(currentProfile.height.toString());
   const [weight, setWeight] = useState(currentProfile.weight.toString());
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
+
+  const [errors, setErrors] = useState({
+    name: false,
+    age: false,
+    height: false,
+    weight: false,
+  });
 
   function handleSubmit(event: any) {
     event.preventDefault();
+
+    const newErrors = {
+      name: name.trim().length < 2,
+      age: Number(age) < 1 || Number(age) > 120,
+      height: Number(height) < 40 || Number(height) > 250,
+      weight: Number(weight) < 2 || Number(weight) > 400,
+    };
+
+    setErrors(newErrors);
+
+    if (Object.values(newErrors).some((error) => error)) {
+      setOpenErrorSnackbar(true);
+      return;
+    }
+
     const profileToSave = {
       id: currentProfile.id,
       name,
@@ -71,7 +94,20 @@ function Profile() {
             <TextField
               label="Name"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                setName(e.target.value);
+
+                if (errors.name) {
+                  setErrors({
+                    ...errors,
+                    name: false,
+                  });
+                }
+              }}
+              error={errors.name}
+              helperText={
+                errors.name ? "Name must contain at least 2 characters." : ""
+              }
               fullWidth
             />
 
@@ -79,7 +115,20 @@ function Profile() {
               label="Age"
               type="number"
               value={age}
-              onChange={(e) => setAge(e.target.value)}
+              onChange={(e) => {
+                setAge(e.target.value);
+
+                if (errors.age) {
+                  setErrors({
+                    ...errors,
+                    age: false,
+                  });
+                }
+              }}
+              error={errors.age}
+              helperText={
+                errors.age ? "Age must be between 1 and 120 years." : ""
+              }
               fullWidth
             />
 
@@ -87,7 +136,20 @@ function Profile() {
               label="Height (cm)"
               type="number"
               value={height}
-              onChange={(e) => setHeight(e.target.value)}
+              onChange={(e) => {
+                setHeight(e.target.value);
+
+                if (errors.height) {
+                  setErrors({
+                    ...errors,
+                    height: false,
+                  });
+                }
+              }}
+              error={errors.height}
+              helperText={
+                errors.height ? "Height must be between 40 and 250 cm." : ""
+              }
               fullWidth
             />
 
@@ -95,7 +157,20 @@ function Profile() {
               label="Weight (kg)"
               type="number"
               value={weight}
-              onChange={(e) => setWeight(e.target.value)}
+              onChange={(e) => {
+                setWeight(e.target.value);
+
+                if (errors.weight) {
+                  setErrors({
+                    ...errors,
+                    weight: false,
+                  });
+                }
+              }}
+              error={errors.weight}
+              helperText={
+                errors.weight ? "Weight must be between 2 and 400 kg." : ""
+              }
               fullWidth
             />
 
@@ -111,6 +186,26 @@ function Profile() {
           </Stack>
         </form>
       </Paper>
+
+      <Snackbar
+        open={openErrorSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenErrorSnackbar(false)}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+      >
+        <Alert
+          onClose={() => setOpenErrorSnackbar(false)}
+          severity="error"
+          variant="filled"
+          sx={{ width: "100%" }}
+        >
+          Please fill in all required fields.
+        </Alert>
+      </Snackbar>
+
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}
