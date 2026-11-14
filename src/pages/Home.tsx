@@ -12,7 +12,7 @@ import type { Workout } from "../types/types";
 
 import StatCard from "../components/dashboard/StatCard";
 import SportsGymnasticsIcon from "@mui/icons-material/SportsGymnastics";
-import CheckListIcon from "@mui/icons-material/CheckList";
+import ChecklistOutlinedIcon from "@mui/icons-material/ChecklistOutlined";
 import { useNavigate } from "react-router-dom";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
@@ -95,7 +95,7 @@ function Home() {
           <StatCard
             title="Total Sets"
             value={totalSets}
-            icon={<CheckListIcon color="success" />}
+            icon={<ChecklistOutlinedIcon color="success" />}
           />
         </Grid>
 
