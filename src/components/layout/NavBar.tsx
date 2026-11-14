@@ -1,7 +1,7 @@
 import { NavLink, Link } from "react-router-dom";
 import { Container } from "@mui/material";
 
-import { AppBar, Toolbar, Typography, Button, Box } from "@mui/material";
+import { AppBar, Toolbar, Typography, Box } from "@mui/material";
 
 function NavBar(): React.ReactElement {
   return (
