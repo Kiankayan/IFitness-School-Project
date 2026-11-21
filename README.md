@@ -61,3 +61,23 @@ npm run dev
 **Education:** Intensive Code – Full Stack Developer
 
 **Status:** Completed educational project
+
+## Screenshots
+
+### Dashboard
+![Dashboard](screenshots/1an.png)
+
+### User Profile
+![User Profile](screenshots/2an.png)
+
+### Workout Overview
+![Workout Overview](screenshots/4an.png)
+
+### Workout Details
+![Workout Details](screenshots/5an.png)
+
+### Exercise Details
+![Exercise Details](screenshots/6an.png)
+
+### Set Details
+![Set Details](screenshots/7an.png)
